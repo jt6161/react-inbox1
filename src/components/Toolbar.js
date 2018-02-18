@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 
 class Toolbar extends Component {
+
   render() {
+
     let selectButtonClass = "fa-square-o";
 
     let messagesSelected = this.props.messages.filter(message => message.selected);
@@ -12,18 +14,20 @@ class Toolbar extends Component {
       selectButtonClass = "fa-minus-square-o";
     }
 
-    let countedUnread = this.props.messages.filter(msg => !msg.read).length
+    let countedUnread = this.props.messages.filter(msg => !msg.read).length;
 
     let countedSelected = this.props.messages.reduce((acc, val) => acc + !!val.selected, 0)
     console.log('countedSelected', countedSelected)
 
 
-    return (<div className="row toolbar">
-      <div className="col-md-12">
-        <p className="pull-right">
-          <span className="badge badge">{countedUnread}</span>
-          {countedUnread > 1 || countedUnread < 1 ? 'unread messages' : 'unread message'}
-        </p>
+    return (
+      <div className="row toolbar">
+        <div className="col-md-12">
+          <p className="pull-right">
+            <span
+              className="badge badge">{countedUnread}</span>
+              {countedUnread > 1 || countedUnread < 1 ? 'unread messages' : 'unread message'}
+          </p>
 
         <button
           className="btn btn-danger" disabled="disabled">
@@ -72,6 +76,7 @@ class Toolbar extends Component {
           onChange={(e) => this.props.removeLabel(e.target.value)}
           disabled={!countedSelected}
           >
+
           <option>Remove label</option>
           <option value="dev">dev</option>
           <option value="personal">personal</option>
@@ -91,4 +96,4 @@ class Toolbar extends Component {
   }
 }
 
-export default Toolbar;
+export default Toolbar

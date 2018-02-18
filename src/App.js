@@ -71,7 +71,7 @@ state = {
 
 toggleRead = (selectedMessage) => {
   let otherMessages = this.state.messages.filter(message => selectedMessage.id !== message.id)
-  console.log('otherMessages', otherMessages)
+
   let changedMessage = {
     id: selectedMessage.id,
     subject: selectedMessage.subject,
@@ -121,6 +121,7 @@ toolbarCopyCurrentState = () => {
 }
 
 selectButtonFunc = (type) => {
+
   let messagesStateCopy = this.toolbarCopyCurrentState();
 
   if (type.includes('check')) {
@@ -134,34 +135,35 @@ selectButtonFunc = (type) => {
       return message;
     });
   }
+
     this.setState({ messages: messagesStateCopy });
 }
 
-SetUnreadFunc = () => {
+setUnreadFunc = () => {
   let newState = this.state.messages.map(msg => {
     if(msg.selected) msg.read = true
     return msg;
   })
-  this.setState({ messages: newState});
+  this.setState({ messages: newState });
 }
 
-SetReadFunc = () => {
+setReadFunc = () => {
   let newState = this.state.messages.map(msg => {
     if(msg.selected) msg.read = true
     return msg;
   })
-  this.setState({ messages: newState});
+  this.setState({ messages: newState });
 }
 
 deleteMessages = () => {
   let newState = this.state.messages.fitler(msg => !msg.selected);
-  this.setState({ messages: newState});
+  this.setState({ messages: newState });
 }
 
 addLabel = (label) => {
   console.log('heard', label);
   let newState = this.state.messages.map(msg => {
-    if(msg.selected && !msg.lables.includes(label)) msg.labels.push(label)
+    if(msg.selected && !msg.labels.includes(label)) msg.labels.push(label)
     return msg
   })
   this.setState({ messages: newState })
@@ -185,7 +187,7 @@ removeLabel = (label) => {
           messages={this.state.messages}
           selectButtonFunc={this.selectButtonFunc}
           setUnreadFunc={this.setUnreadFunc}
-          SetReadFunc={this.SetReadFunc}
+          setReadFunc={this.setReadFunc}
           deleteMessages={this.deleteMessages}
           addLabel={this.addLabel}
           removeLabel={this.removeLabel}
