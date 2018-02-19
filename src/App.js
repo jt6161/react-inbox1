@@ -7,17 +7,17 @@ import axios from 'axios'
 
 class App extends Component {
 
-state = {
-  messages: [],
-  showCompose: false
-  }
+  state = {
+    messages: [],
+    showCompose: false
+    }
 
   componentDidMount = async () => {
     let messages = await axios.get(`http://localhost:8000/messages`)
     this.setState({ messages: messages.data })
   }
 
-  addMessage = (message) => {
+  addMessage = async (message) => {
     let newMessage = {
       ...message,
       labels: JSON.stringify([]),
@@ -46,17 +46,17 @@ state = {
     this.setState({ messages: otherMessages.concat(changedMessage).sort((a, b) => a.id - b.id)})
     }
 
-    toggleStarred = (selectedMessage) => {
-      let otherMessages = this.state.messages.filter(message => selectedMessage.id !== message.id)
-      let changedMessage = {
-        id: selectedMessage.id,
-        subject: selectedMessage.subject,
-        read: selectedMessage.read,
-        starred: !selectedMessage.starred,
-        labels: selectedMessage.labels
-      }
-      this.setState({ messages: otherMessages.concat(changedMessage).sort((a, b) => a.id - b.id)})
-      }
+  toggleStarred = (selectedMessage) => {
+    let otherMessages = this.state.messages.filter(message => selectedMessage.id !== message.id)
+    let changedMessage = {
+      id: selectedMessage.id,
+      subject: selectedMessage.subject,
+      read: selectedMessage.read,
+      starred: !selectedMessage.starred,
+      labels: selectedMessage.labels
+    }
+    this.setState({ messages: otherMessages.concat(changedMessage).sort((a, b) => a.id - b.id)})
+    }
 
   toggleSelected = (selectedMessage) => {
     let otherMessages = this.state.messages.filter(message => selectedMessage.id !== message.id)
@@ -115,6 +115,7 @@ state = {
           toggleComposeForm={this.toggleComposeForm}
           showCompose={this.state.showCompose}
         />
+      {this.state.showCompose && <ComposeForm addMessage={this.addMessage}/>}
         <MessageList
           messages={this.state.messages}
           toggleRead={this.toggleRead}

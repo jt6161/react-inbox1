@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class Toolbar extends Component {
 
@@ -14,69 +14,37 @@ class Toolbar extends Component {
       selectButtonClass = "fa-minus-square-o";
     }
 
-    let countedUnread = this.props.messages.filter(msg => !msg.read).length;
-
-    let countedSelected = this.props.messages.reduce((acc, val) => acc + !!val.selected, 0)
-    console.log('countedSelected', countedSelected)
-
-
     return (
       <div className="row toolbar">
         <div className="col-md-12">
           <p className="pull-right">
-            <span
-              className="badge badge">{countedUnread}</span>
-              {countedUnread > 1 || countedUnread < 1 ? 'unread messages' : 'unread message'}
+            <span className="badge badge">2</span>
+              unread messages
           </p>
 
-          <button
-            className="btn btn-danger" disabled="disabled">
+          <a className="btn btn-danger" onClick={this.props.toggleComposeForm}>
             <i className="fa fa-plus"></i>
-          </button>
+          </a>
 
           <button
             className="btn btn-default"
-            onClick={() => this.props.selectButtonFunc(selectButtonClass)}
-            disabled={!countedSelected}
-            >
+            onClick={() => this.props.selectButtonFunc(selectButtonClass)}>
 
             <i className={`fa ${selectButtonClass}`}></i>
           </button>
 
-          <button
-            className="btn btn-default"
-            onClick={() => this.props.SetReadFunc()}
-            disabled={!countedSelected}
-            >
-            Mark As Read
-          </button>
+          <button className="btn btn-default">Mark As Read</button>
 
-          <button
-            className="btn btn-default"
-            onClick={() => this.props.setUnreadFunc()}
-            disabled={!countedSelected}
-            >
-              Mark As Unread
-            </button>
+          <button className="btn btn-default">Mark As Unread</button>
 
-          <select
-            className="form-control label-select"
-            onChange={(e) => this.props.addLabel(e.target.value)}
-            disabled={!countedSelected}
-            >
-
+          <select className="form-control label-select">
             <option>Apply label</option>
             <option value="dev">dev</option>
             <option value="personal">personal</option>
             <option value="gschool">gschool</option>
           </select>
 
-          <select
-            className="form-control label-select"
-            onChange={(e) => this.props.removeLabel(e.target.value)}
-            disabled={!countedSelected}
-            >
-
+          <select className="form-control label-select">
             <option>Remove label</option>
             <option value="dev">dev</option>
             <option value="personal">personal</option>
@@ -84,16 +52,13 @@ class Toolbar extends Component {
           </select>
 
           <button
-            className="btn btn-default"
-            onClick={() => this.props.deleteMessages()}
-            disabled={!countedSelected}
-            >
-
+            className="btn btn-default">
             <i className="fa fa-trash-o"></i>
           </button>
       </div>
-    </div>)
+    </div>
+    )
   }
 }
 
-export default Toolbar
+export default Toolbar;
