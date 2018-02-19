@@ -29,68 +29,68 @@ class Toolbar extends Component {
               {countedUnread > 1 || countedUnread < 1 ? 'unread messages' : 'unread message'}
           </p>
 
-        <button
-          className="btn btn-danger" disabled="disabled">
-          <i className="fa fa-plus"></i>
-        </button>
-
-        <button
-          className="btn btn-default"
-          onClick={() => this.props.selectButtonFunc(selectButtonClass)}
-          disabled={!countedSelected}
-          >
-
-          <i className={`fa ${selectButtonClass}`}></i>
-        </button>
-
-        <button
-          className="btn btn-default"
-          onClick={() => this.props.SetReadFunc()}
-          disabled={!countedSelected}
-          >
-          Mark As Read
-        </button>
-
-        <button
-          className="btn btn-default"
-          onClick={() => this.props.setUnreadFunc()}
-          disabled={!countedSelected}
-          >
-            Mark As Unread
+          <button
+            className="btn btn-danger" disabled="disabled">
+            <i className="fa fa-plus"></i>
           </button>
 
-        <select
-          className="form-control label-select"
-          onChange={(e) => this.props.addLabel(e.target.value)}
-          disabled={!countedSelected}
-          >
+          <button
+            className="btn btn-default"
+            onClick={() => this.props.selectButtonFunc(selectButtonClass)}
+            disabled={!countedSelected}
+            >
 
-          <option>Apply label</option>
-          <option value="dev">dev</option>
-          <option value="personal">personal</option>
-          <option value="gschool">gschool</option>
-        </select>
+            <i className={`fa ${selectButtonClass}`}></i>
+          </button>
 
-        <select
-          className="form-control label-select"
-          onChange={(e) => this.props.removeLabel(e.target.value)}
-          disabled={!countedSelected}
-          >
+          <button
+            className="btn btn-default"
+            onClick={() => this.props.SetReadFunc()}
+            disabled={!countedSelected}
+            >
+            Mark As Read
+          </button>
 
-          <option>Remove label</option>
-          <option value="dev">dev</option>
-          <option value="personal">personal</option>
-          <option value="gschool">gschool</option>
-        </select>
+          <button
+            className="btn btn-default"
+            onClick={() => this.props.setUnreadFunc()}
+            disabled={!countedSelected}
+            >
+              Mark As Unread
+            </button>
 
-        <button
-          className="btn btn-default"
-          onClick={() => this.props.deleteMessages()}
-          disabled={!countedSelected}
-          >
+          <select
+            className="form-control label-select"
+            onChange={(e) => this.props.addLabel(e.target.value)}
+            disabled={!countedSelected}
+            >
 
-          <i className="fa fa-trash-o"></i>
-        </button>
+            <option>Apply label</option>
+            <option value="dev">dev</option>
+            <option value="personal">personal</option>
+            <option value="gschool">gschool</option>
+          </select>
+
+          <select
+            className="form-control label-select"
+            onChange={(e) => this.props.removeLabel(e.target.value)}
+            disabled={!countedSelected}
+            >
+
+            <option>Remove label</option>
+            <option value="dev">dev</option>
+            <option value="personal">personal</option>
+            <option value="gschool">gschool</option>
+          </select>
+
+          <button
+            className="btn btn-default"
+            onClick={() => this.props.deleteMessages()}
+            disabled={!countedSelected}
+            >
+
+            <i className="fa fa-trash-o"></i>
+          </button>
       </div>
     </div>)
   }

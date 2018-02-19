@@ -103,6 +103,44 @@ state = {
       this.setState({ messages: messagesStateCopy });
   }
 
+setUnreadFunc = () => {
+  let newState = this.state.messages.map(msg => {
+    if(msg.selected) msg.read = true
+    return msg;
+  })
+  this.setState({ messages: newState });
+}
+
+setReadFunc = () => {
+  let newState = this.state.messages.map(msg => {
+    if(msg.selected) msg.read = true
+    return msg;
+  })
+  this.setState({ messages: newState });
+}
+
+deleteMessages = () => {
+  let newState = this.state.messages.fitler(msg => !msg.selected);
+  this.setState({ messages: newState });
+}
+
+addLabel = (label) => {
+  console.log('heard', label);
+  let newState = this.state.messages.map(msg => {
+    if(msg.selected && !msg.labels.includes(label)) msg.labels.push(label)
+    return msg
+  })
+  this.setState({ messages: newState })
+}
+
+removeLabel = (label) => {
+  let newState = this.state.messages.map(msg => {
+    if(msg.selected) msg.labels = msg.labels.filter(l => l !== label)
+    return msg
+  })
+  console.log('heard', newState);
+  this.setState({ messages: newState })
+}
 
   render() {
     let numOfSelectedMsgs = this.state.messages.filter(msg => msg.selected).length;
@@ -112,8 +150,11 @@ state = {
           numOfSelectedMsgs={numOfSelectedMsgs}
           messages={this.state.messages}
           selectButtonFunc={this.selectButtonFunc}
-          toggleComposeForm={this.toggleComposeForm}
-          showCompose={this.state.showCompose}
+          setUnreadFunc={this.setUnreadFunc}
+          setReadFunc={this.setReadFunc}
+          deleteMessages={this.deleteMessages}
+          addLabel={this.addLabel}
+          removeLabel={this.removeLabel}
         />
         <MessageList
           messages={this.state.messages}
